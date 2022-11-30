@@ -16,7 +16,7 @@ def get_param(req, param_name, default_value=None):
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     text = get_param(req, 'text')
-    size = get_param(req, 'size', 80)
+    size = int(get_param(req, 'size', 80))
     bgcolor = get_param(req, 'bgcolor', 'black')
     fontcolor = get_param(req, 'fontcolor', 'white')
     if text:
