@@ -3,6 +3,9 @@ import io
 import azure.functions as func
 from icon_writer import write_icon
 
+app = func.FunctionApp()
+
+
 def get_param(req, param_name, default_value=None):
     param_value = req.params.get(param_name)
     if not param_value:
@@ -14,6 +17,8 @@ def get_param(req, param_name, default_value=None):
             param_value = req_body.get(param_name)
     return param_value if param_value is not None else default_value
 
+@app.function_name(name="IconWriter")
+@app.route(route="IconWriter")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     text = get_param(req, 'text')
     size = int(get_param(req, 'size', 80))
